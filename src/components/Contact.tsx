@@ -4,13 +4,56 @@ import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState({ name: '', email: '', phone: '' });
+
+  const validate = () => {
+    let newErrors = { name: '', email: '', phone: '' };
+    let isValid = true;
+
+    // Validation for 'Nome Completo'
+    if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+      newErrors.name = 'O nome deve conter apenas letras.';
+      isValid = false;
+    }
+
+    // Validation for 'E-mail'
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Insira um e-mail válido.';
+      isValid = false;
+    }
+
+    // Validation for 'Telefone'
+    if (!/^[0-9]+$/.test(formData.phone)) {
+      newErrors.phone = 'O telefone deve conter apenas números.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Live validation feedback
+    let newErrors = { ...errors, [name]: '' };
+    if (name === 'name' && !/^[a-zA-Z\s]*$/.test(value)) {
+      newErrors.name = 'O nome deve conter apenas letras.';
+    } else if (name === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
+      newErrors.email = 'Insira um e-mail válido.';
+    } else if (name === 'phone' && !/^[0-9]*$/.test(value)) {
+      newErrors.phone = 'O telefone deve conter apenas números.';
+    }
+    setErrors(newErrors);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validate()) {
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:3001/send-email', {
@@ -58,10 +101,13 @@ const Contact: React.FC = () => {
                 <div className="text-center p-6 bg-green-500/20 rounded-lg h-full flex flex-col justify-center items-center"><Send className="h-10 w-10 text-accent-400 mb-4" /><h4 className="text-xl font-semibold text-white">Mensagem Enviada!</h4></div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <input type="text" name="name" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Nome Completo *" />
-                  <input type="email" name="email" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Seu E-mail *" />
-                  <input type="tel" name="phone" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Telefone *" />
-                  <textarea name="message" required rows={4} onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition resize-none placeholder:text-gray-400 text-sm" placeholder="Sua Mensagem *"></textarea>
+                  <input type="text" name="name" required onChange={handleChange} value={formData.name} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Nome Completo *" />
+                  {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
+                  <input type="email" name="email" required onChange={handleChange} value={formData.email} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Seu E-mail *" />
+                  {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
+                  <input type="tel" name="phone" required onChange={handleChange} value={formData.phone} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Telefone *" />
+                  {errors.phone && <p className="text-red-400 text-sm">{errors.phone}</p>}
+                  <textarea name="message" required rows={4} onChange={handleChange} value={formData.message} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition resize-none placeholder:text-gray-400 text-sm" placeholder="Sua Mensagem *"></textarea>
                   <button type="submit" className="w-full bg-accent-600 hover:bg-accent-500 text-primary-900 px-8 py-3 rounded-lg font-semibold text-base transition transform hover:scale-105">Enviar Mensagem</button>
                 </form>
               )}
