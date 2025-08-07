@@ -9,10 +9,28 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+
+    try {
+      const response = await fetch('http://localhost:3001/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro de rede:', error);
+      alert('Não foi possível se conectar ao servidor. Verifique sua conexão.');
+    }
   };
 
   return (
@@ -41,6 +59,7 @@ const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input type="text" name="name" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Nome Completo *" />
+                  <input type="email" name="email" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Seu E-mail *" />
                   <input type="tel" name="phone" required onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition placeholder:text-gray-400 text-sm" placeholder="Telefone *" />
                   <textarea name="message" required rows={4} onChange={handleChange} className="w-full px-4 py-2.5 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent-500 transition resize-none placeholder:text-gray-400 text-sm" placeholder="Sua Mensagem *"></textarea>
                   <button type="submit" className="w-full bg-accent-600 hover:bg-accent-500 text-primary-900 px-8 py-3 rounded-lg font-semibold text-base transition transform hover:scale-105">Enviar Mensagem</button>
