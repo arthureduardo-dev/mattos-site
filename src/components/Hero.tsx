@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const scrollToContact = () => {
@@ -12,14 +13,29 @@ const Hero: React.FC = () => {
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white animate-fade-in-up">
-            Internet de Verdade.
-            <span className="text-accent-400 block">Conexão sem Limites.</span>
-          </h1>
-          <p className="text-lg md:text-xl mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Experimente a estabilidade e a velocidade da fibra óptica, com soluções completas de segurança e suporte que você pode confiar.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight text-white"
+          >
+            Internet de Verdade. Segurança Total.
+            <span className="text-accent-400 block">Conexão e Monitoramento para você.</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+            className="text-lg md:text-xl mb-10 text-gray-300 max-w-2xl mx-auto"
+          >
+            Experimente a estabilidade da fibra óptica aliada a soluções de vigilância, com suporte completo que você pode confiar.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <button
               onClick={scrollToContact}
               className="bg-accent-600 hover:bg-accent-500 text-primary-900 px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -27,12 +43,12 @@ const Hero: React.FC = () => {
               Fale com um Especialista
             </button>
             <button
-              onClick={() => document.getElementById('internet-plans')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-lg text-white px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 border border-white/20"
+              onClick={() => document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-white/10 backdrop-blur-lg text-white px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 border border-white/20"
             >
               Conheça os Planos
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

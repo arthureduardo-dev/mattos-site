@@ -20,12 +20,16 @@ const Header: React.FC = () => {
             </div>
             <h1 className="text-2xl font-bold tracking-wider">MATTOS</h1>
           </div>
-          
-          <nav className="hidden md:flex items-center space-x-8">
+
+          <nav className="hidden md:flex items-center space-x-6">
             <button onClick={() => scrollToSection('home')} className="text-gray-300 hover:text-white transition-colors">Início</button>
-            <button onClick={() => scrollToSection('internet-plans')} className="text-gray-300 hover:text-white transition-colors">Planos</button>
+            <button onClick={() => scrollToSection('monitoring')} className="text-gray-300 hover:text-white transition-colors">Monitoramento</button>
+            <button onClick={() => scrollToSection('plans')} className="text-gray-300 hover:text-white transition-colors">Planos</button>
             <button onClick={() => scrollToSection('services')} className="text-gray-300 hover:text-white transition-colors">Serviços</button>
-            <button onClick={() => scrollToSection('contact')} className="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full font-medium transition-all border border-white/20">Contato</button>
+            <a href="https://ixc.grupomattos.net.br/central_assinante_web/login" target="_blank" rel="noopener noreferrer"
+               className="bg-accent-600 text-primary-900 px-5 py-2 rounded-full font-semibold hover:bg-accent-500 transition-colors text-sm">
+              Central do Assinante
+            </a>
           </nav>
 
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Menu">
@@ -36,9 +40,13 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 p-4 bg-primary-800/90 backdrop-blur-md rounded-lg space-y-2">
             <button onClick={() => scrollToSection('home')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Início</button>
-            <button onClick={() => scrollToSection('internet-plans')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Planos</button>
+            <button onClick={() => scrollToSection('monitoring')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Monitoramento</button>
+            <button onClick={() => scrollToSection('plans')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Planos</button>
             <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Serviços</button>
-            <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 px-2 rounded hover:bg-white/10">Contato</button>
+            <a href="https://ixc.grupomattos.net.br/central_assinante_web/login" target="_blank" rel="noopener noreferrer"
+               className="block w-full text-left py-2 px-2 rounded bg-accent-600 text-primary-900 font-semibold text-center mt-2">
+              Central do Assinante
+            </a>
           </nav>
         )}
       </div>
