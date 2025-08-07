@@ -8,12 +8,22 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div>
       <Header />
-      <Hero />
-      <InternetPlans />
-      <Services />
-      <Contact />
+      <main>
+        <section id="home">
+          <Hero />
+        </section>
+        <section id="internet-plans">
+          <InternetPlans />
+        </section>
+        <section id="services">
+          <Services />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
       <Footer />
     </div>
   );
