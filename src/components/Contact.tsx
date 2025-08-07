@@ -29,10 +29,10 @@ const Contact: React.FC = () => {
             <div className="space-y-6">
               <h3 className="text-xl font-bold text-white">Canais de Atendimento</h3>
               <div className="space-y-4">
-                <div className="flex items-center space-x-3"><Phone className="h-5 w-5 text-accent-400" /><p className="text-gray-300">(XX) XXXX-XXXX</p></div>
-                <div className="flex items-center space-x-3"><Mail className="h-5 w-5 text-accent-400" /><p className="text-gray-300">contato@grupomattos.com.br</p></div>
-                <div className="flex items-center space-x-3"><MapPin className="h-5 w-5 text-accent-400" /><p className="text-gray-300">Rua Principal, 123 - Centro</p></div>
-                <div className="flex items-center space-x-3"><Clock className="h-5 w-5 text-accent-400" /><p className="text-gray-300">Seg à Sex: 8h às 18h</p></div>
+                <div className="flex items-center space-x-3"><Phone className="h-5 w-5 text-accent-400" /><p className="text-gray-300">51 3542-1667</p></div>
+                <div className="flex items-center space-x-3"><Mail className="h-5 w-5 text-accent-400" /><p className="text-gray-300">suporte@mattosnet.net.br</p></div>
+                <div className="flex items-center space-x-3"><MapPin className="h-5 w-5 text-accent-400" /><p className="text-gray-300">R. Arnaldo da Costa Bard, 2932 - Centro, Taquara - RS</p></div>
+                <div className="flex items-center space-x-3"><Clock className="h-5 w-5 text-accent-400" /><p className="text-gray-300">Seg à Sex: 08h às 12:00 e 13:30 às 18:00 | Sáb: 08:00 às 11:30</p></div>
               </div>
             </div>
             <div>

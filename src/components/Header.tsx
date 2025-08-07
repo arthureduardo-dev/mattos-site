@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X, Wifi } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -15,10 +15,8 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4 relative z-10">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <div className="bg-accent-600 p-2 rounded-lg">
-              <Wifi className="h-6 w-6 text-primary-900" />
-            </div>
-            <h1 className="text-2xl font-bold tracking-wider">MATTOS</h1>
+            <img src="https://res.cloudinary.com/dtuacdvn6/image/upload/v1753749129/Novo_Projeto_kwc45y.png" alt="Grupo Mattos Logo" className="h-10" />
+            <h1 className="text-2xl font-bold tracking-wider">GRUPO MATTOS</h1>
           </div>
 
           <nav className="hidden md:flex items-center space-x-6">
